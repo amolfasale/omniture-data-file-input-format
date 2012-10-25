@@ -7,7 +7,7 @@ object Dependencies {
   )
 
   object V {
-    val hadoop    = "0.20.205"    
+    val hadoop    = "0.20.2"    
     val logging   = "1.1.1"
   }
 

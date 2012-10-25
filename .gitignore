@@ -6,3 +6,9 @@ bin/
 *.log
 target
 
+# SBT Files #
+target/
+lib_managed/
+src_managed/
+project/boot/
+project/plugins/project/
