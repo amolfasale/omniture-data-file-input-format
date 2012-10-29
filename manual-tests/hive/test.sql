@@ -1,5 +1,10 @@
+-- Manual test for reading Omniture data into Hive using OmnitureDataFileInputFormat
+-- HiveQL below is compatible with Amazon Elastic MapReduce
+
+-- 1. Add the jar
 ADD JAR s3://omniture-connector/static/omniture-data-file-input-format-0.0.1.jar ;
 
+-- 2. Create the table
 CREATE TABLE omniture_raw (
 hit_time_gmt TIMESTAMP,
 service STRING,
@@ -237,27 +242,5 @@ STORED AS
 INPUTFORMAT 'com.tgam.hadoop.mapred.OmnitureDataFileInputFormat' 
 OUTPUTFORMAT 'org.apache.hadoop.hive.ql.io.IgnoreKeyTextOutputFormat';
 
-
-CREATE EXTERNAL TABLE test (
-field1 string,
-field2 string,
-field3 string,
-field4 string)
-ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t'
-STORED AS INPUTFORMAT 'com.tgam.hadoop.OmnitureDataFileInputFormat' OUTPUTFORMAT 'org.apache.hadoop.hive.ql.io.IgnoreKeyTextOutputFormat'
-LOCATION 's3://omniture-connector/data/sample/hit_data.tsv' ;
-
-ADD JAR s3://omniture-connector/static/omniture-data-file-input-format_2.9.1-0.0.1.jar ;
-converting to local s3://omniture-connector/static/omniture-data-file-input-format_2.9.1-0.0.1.jar
-SLF4J: Class path contains multiple SLF4J bindings.
-SLF4J: Found binding in [jar:file:/home/hadoop/lib/slf4j-log4j12-1.6.1.jar!/org/slf4j/impl/StaticLoggerBinder.class]
-SLF4J: Found binding in [jar:file:/home/hadoop/.versions/hive-0.8.1/lib/slf4j-log4j12-1.6.1.jar!/org/slf4j/impl/StaticLoggerBinder.class]
-SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
-Added /mnt/var/lib/hive_081/downloaded_resources/omniture-data-file-input-format_2.9.1-0.0.1.jar to class path
-Added resource: /mnt/var/lib/hive_081/downloaded_resources/omniture-data-file-input-format_2.9.1-0.0.1.jar
-
-ADD JAR s3://snplow-static/snowplow-log-deserializers-0.4.9.jar ;
-converting to local s3://snplow-static/snowplow-log-deserializers-0.4.9.jar
-Added /mnt/var/lib/hive_081/downloaded_resources/snowplow-log-deserializers-0.4.9.jar to class path
-Added resource: /mnt/var/lib/hive_081/downloaded_resources/snowplow-log-deserializers-0.4.9.jar
-hive> 
+-- 3. Check you've got our rows
+SELECT * FROM omniture_raw ;
