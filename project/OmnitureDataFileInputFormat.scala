@@ -17,7 +17,8 @@ object OmnitureDataFileInputFormat extends Build {
     .settings(
       libraryDependencies ++= Seq(
         Libraries.hadoop,
-        Libraries.logging
+        Libraries.logging,
+        Libraries.junitInterface
       )
     )
 }
