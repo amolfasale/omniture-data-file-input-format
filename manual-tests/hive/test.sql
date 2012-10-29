@@ -6,7 +6,7 @@ ADD JAR s3://omniture-connector/static/omniture-data-file-input-format-0.0.1.jar
 
 -- 2. Create the table
 CREATE TABLE omniture_raw (
-hit_time_gmt TIMESTAMP,
+hit_time_gmt STRING,
 service STRING,
 accept_language STRING,
 date_time STRING,
@@ -240,7 +240,8 @@ click_tag STRING
 ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' 
 STORED AS 
 INPUTFORMAT 'com.tgam.hadoop.mapred.OmnitureDataFileInputFormat' 
-OUTPUTFORMAT 'org.apache.hadoop.hive.ql.io.IgnoreKeyTextOutputFormat';
+OUTPUTFORMAT 'org.apache.hadoop.hive.ql.io.IgnoreKeyTextOutputFormat'
+LOCATION 's3://omniture-connector/data/sample/';
 
 -- 3. Check you've got our rows
 SELECT * FROM omniture_raw ;
