@@ -5,7 +5,7 @@
 ADD JAR s3://omniture-connector/static/omniture-data-file-input-format-0.0.1.jar ;
 
 -- 2. Create the table
-CREATE TABLE omniture_raw (
+CREATE EXTERNAL TABLE omniture_raw (
 hit_time_gmt STRING,
 service STRING,
 accept_language STRING,
@@ -228,13 +228,9 @@ post_evar48 STRING,
 post_evar49 STRING,
 post_evar50 STRING,
 click_action STRING,
--- click_action_type INT,
-click_action_type STRING,
 click_context STRING,
--- click_context_type INT,
-click_context_type STRING,
--- click_sourceid BIGINT,
-click_sourceid STRING,
+click_context_type INT,
+click_sourceid BIGINT,
 click_tag STRING
 )
 ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' 
